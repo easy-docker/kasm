@@ -19,4 +19,6 @@ RUN echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" > /
   
 RUN pacman -Syyu --noconfirm && \
   pacman -S --noconfirm vim htop iotop iftop iputils net-tools dnsutils
-RUN pacman -S --noconfirm git fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-chinese-addons fcitx5-pinyin-zhwiki
+RUN pacman -S --noconfirm git fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-config-qt fcitx5-chinese-addons \
+  fcitx5-pinyin-zhwiki yay
+  
