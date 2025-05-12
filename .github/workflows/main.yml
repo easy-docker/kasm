@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'desktop/arch/kde/Dockerfile'
   workflow_dispatch:
 jobs:
   push_to_registry:
