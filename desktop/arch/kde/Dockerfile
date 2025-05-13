@@ -22,10 +22,4 @@ RUN pacman -Syyu --noconfirm && \
 RUN pacman -Sy --noconfirm git fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-config-qt fcitx5-chinese-addons \
   fcitx5-pinyin-zhwiki yay
 # 在 Dockerfile 中安装并配置 dbus
-RUN pacman -S --noconfirm dbus && \
-    dbus-uuidgen --ensure
-
-# 在运行命令时启动 dbus
-RUN /usr/bin/dbus-daemon --system --fork && \
-    yay -Sy --noconfirm php74 php74-redis php74-curl npm maven && \
-    pkill dbus-daemon
+RUN pacman -Sy --noconfirm npm maven
