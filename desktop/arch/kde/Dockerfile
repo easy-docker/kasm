@@ -22,4 +22,4 @@ RUN pacman -Syyu --noconfirm && \
 RUN pacman -Sy --noconfirm git fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-config-qt fcitx5-chinese-addons \
   fcitx5-pinyin-zhwiki yay
 # 在 Dockerfile 中安装并配置 dbus
-RUN pacman -Sy --noconfirm npm maven
+RUN pacman -Sy --noconfirm npm maven bash-completion docker-completion
