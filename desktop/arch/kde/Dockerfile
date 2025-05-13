@@ -18,7 +18,7 @@ RUN echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" >> 
   echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
   
 RUN pacman -Syyu --noconfirm && \
-  pacman -S --noconfirm vim htop iotop iftop iputils net-tools dnsutils
-RUN pacman -S --noconfirm git fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-config-qt fcitx5-chinese-addons \
+  pacman -Sy --noconfirm vim htop iotop iftop iputils net-tools dnsutils
+RUN pacman -Sy --noconfirm git fcitx5 fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-config-qt fcitx5-chinese-addons \
   fcitx5-pinyin-zhwiki yay
-RUN yay -S --noconfirm php74 php74-curl php74-redis npm maven
+RUN yay -Sy --noconfirm php74 php74-curl php74-redis npm maven
