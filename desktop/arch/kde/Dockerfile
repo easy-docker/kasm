@@ -20,7 +20,7 @@ RUN echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" >> 
 RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
     git base-devel sudo yay \
-    vim htop iotop iftop \
+    vim htop iotop iftop fuse2 \
     iputils net-tools dnsutils \
     npm maven bash-completion \
     fcitx5 fcitx5-gtk fcitx5-qt \
