@@ -1,6 +1,4 @@
-FROM lscr.io/linuxserver/webtop:arch-kde
-
-LABEL maintainer="Ghostry <ghostry.green@gmail.com>"
+FROM lscr.io/linuxserver/webtop:arch-kde as builder
 
 RUN echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist && \
   echo "Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist && \
@@ -38,3 +36,19 @@ RUN cd /build && git clone https://aur.archlinux.org/google-chrome.git && \
 RUN rm -rf /build && \
     pacman -Scc --noconfirm && \
     rm -rf /var/cache/pacman/pkg/*
+    
+FROM scratch
+LABEL maintainer="Ghostry <ghostry.green@gmail.com>"
+
+COPY --from=builder / /
+
+ENV PS1=$(whoami)@$(hostname):$(pwd)\$  HOME=/root TERM=xterm S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 S6_VERBOSITY=1 S6_STAGE2_HOOK=/docker-mods VIRTUAL_ENV=/lsiopy PATH=/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+ENV DISPLAY=:1 PERL5LIB=/usr/local/bin OMP_WAIT_POLICY=PASSIVE GOMP_SPINCOUNT=0 HOME=/config START_DOCKER=true PULSE_RUNTIME_PATH=/defaults NVIDIA_DRIVER_CAPABILITIES=all
+
+EXPOSE 3000/tcp 3001/tcp
+
+VOLUME [/config]
+
+ENTRYPOINT ["/init"]
+
