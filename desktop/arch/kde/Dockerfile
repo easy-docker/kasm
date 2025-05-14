@@ -17,7 +17,7 @@ RUN echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" >> 
   echo 'SigLevel = Never' >> /etc/pacman.conf && \
   echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
 
-RUN pacman -Syyu --noconfirm \
+RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
     git base-devel sudo yay \
     vim htop iotop iftop \
@@ -25,11 +25,11 @@ RUN pacman -Syyu --noconfirm \
     npm maven bash-completion \
     fcitx5 fcitx5-gtk fcitx5-qt \
     fcitx5-configtool fcitx5-config-qt \
-    fcitx5-chinese-addons fcitx5-pinyin-zhwiki \
+    fcitx5-chinese-addons fcitx5-pinyin-zhwiki && \
     mkdir -p /build && chown abc:abc /build && \
     cd /build && git clone https://aur.archlinux.org/google-chrome.git && \
     chown -R abc:abc google-chrome && \
-    su - abc -c "cd /build/google-chrome && makepkg -si --noconfirm --needed --skippgpcheck" \
+    su - abc -c "cd /build/google-chrome && makepkg -si --noconfirm --needed --skippgpcheck" && \
     rm -rf /build && \
     pacman -Scc --noconfirm && \
     rm -rf /var/cache/pacman/pkg/*
