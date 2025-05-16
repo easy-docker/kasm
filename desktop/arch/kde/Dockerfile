@@ -22,7 +22,7 @@ RUN pacman -Syyu --noconfirm && \
     git base-devel sudo yay \
     vim htop iotop iftop fuse2 \
     iputils net-tools dnsutils \
-    npm maven bash-completion \
+    npm maven bash-completion unarchiver \
     fcitx5 fcitx5-gtk fcitx5-qt \
     fcitx5-configtool fcitx5-config-qt \
     fcitx5-chinese-addons fcitx5-pinyin-zhwiki && \
