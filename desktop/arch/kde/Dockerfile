@@ -21,7 +21,7 @@ RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
     git base-devel sudo yay sshpass \
     vim htop iotop iftop fuse2 \
-    iputils net-tools dnsutils \
+    iputils net-tools dnsutils opencv \
     npm maven bash-completion unarchiver \
     fcitx5 fcitx5-gtk fcitx5-qt \
     fcitx5-configtool fcitx5-config-qt \
