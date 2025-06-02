@@ -21,15 +21,7 @@ RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
     git base-devel sudo yay sshpass \
     vim htop iotop iftop fuse2 \
-    iputils net-tools dnsutils opencv openmpi hdf5 vtk abseil-cpp protobuf \
+    iputils net-tools dnsutils \
     npm maven bash-completion unarchiver \
-    fcitx5 fcitx5-gtk fcitx5-qt \
-    fcitx5-configtool fcitx5-config-qt \
-    fcitx5-chinese-addons fcitx5-pinyin-zhwiki && \
-    mkdir -p /build && chown abc:abc /build && \
-    cd /build && git clone https://aur.archlinux.org/google-chrome.git && \
-    chown -R abc:abc google-chrome && \
-    su - abc -c "cd /build/google-chrome && makepkg -si --noconfirm --needed --skippgpcheck" && \
-    rm -rf /build && \
     pacman -Scc --noconfirm && \
     rm -rf /var/cache/pacman/pkg/*
