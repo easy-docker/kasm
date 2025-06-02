@@ -17,11 +17,11 @@ RUN echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" > /
   echo 'SigLevel = Never' >> /etc/pacman.conf && \
   echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
 
-RUN pacman -Syyu --noconfirm && \
-    pacman -Sy --noconfirm \
+RUN pacman -Syyu --noconfirm \
+    && pacman -Sy --noconfirm \
     git base-devel sudo yay sshpass \
     vim htop iotop iftop fuse2 \
     iputils net-tools dnsutils \
     npm maven bash-completion unarchiver \
-    pacman -Scc --noconfirm && \
-    rm -rf /var/cache/pacman/pkg/*
+    && pacman -Scc --noconfirm \
+    && rm -rf /var/cache/pacman/pkg/*
