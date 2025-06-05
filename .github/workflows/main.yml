@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_dispatch:  
+  schedule:
+    - cron: '0 3 * * 1'  # 每周一 03:00 (UTC 时间)
 jobs:
   push_to_registry:
     runs-on: ubuntu-latest
@@ -26,5 +28,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push to Docker Hub
         run: |
-          docker build -f desktop/arch/kde/Dockerfile -t ${{ env.IMAGE_NAME }}:arch-kde-desktop .
+          docker buildx build --cache-from type=gha --cache-to type=gha \
+          -f desktop/arch/kde/Dockerfile -t ${{ env.IMAGE_NAME }}:arch-kde-desktop .
           docker push ${{ env.IMAGE_NAME }}:arch-kde-desktop
