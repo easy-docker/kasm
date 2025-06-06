@@ -23,5 +23,6 @@ RUN pacman -Syyu --noconfirm \
     vim htop iotop iftop fuse2 \
     iputils net-tools dnsutils \
     npm maven bash-completion unarchiver \
+    steam lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-intel lib32-vulkan-intel \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
