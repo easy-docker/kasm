@@ -11,8 +11,9 @@ RUN echo "Server = https://mirrors.aliyun.com/archlinux/\$repo/os/\$arch" > /etc
     echo "Server = https://mirrors.xjtu.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist && \
     echo "Server = https://mirrors.shanghaitech.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
 
-# 启用 multilib 仓库
-RUN sed -i '/^#$$multilib$$/{N;s/^#//;s/\n#/\n/}' /etc/pacman.conf
+# 启用 multilib 仓库（直接追加到 pacman.conf）
+RUN echo '[multilib]' >> /etc/pacman.conf && \
+    echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 
 # 添加 archlinuxcn 和 arch4edu 仓库
 RUN echo '[archlinuxcn]' >> /etc/pacman.conf && \
@@ -23,7 +24,7 @@ RUN echo '[archlinuxcn]' >> /etc/pacman.conf && \
     echo 'SigLevel = Never' >> /etc/pacman.conf && \
     echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
 
-# 安装软件包（包括 Steam 及其依赖项）
+# 同步包数据库并安装软件包
 RUN pacman -Syyu --noconfirm && \
     pacman -Sy --noconfirm \
         git base-devel sudo yay sshpass \
