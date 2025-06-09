@@ -22,6 +22,7 @@ RUN pacman -Syyu --noconfirm && \
         vim htop iotop iftop fuse2 \
         iputils net-tools dnsutils \
         npm maven bash-completion unarchiver \
+        wps-office ttf-wps-fonts \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
 
