@@ -24,9 +24,9 @@ RUN pacman -Syyu --noconfirm \
         npm maven bash-completion unarchiver \
         noto-fonts-cjk \
     && (mkdir -p /tmp/build && cd /tmp/build \
-        && git clone https://aur.archlinux.org/wps-office.git \
-        && chown -R abc:abc wps-office \
-        && cd wps-office \
+        && git clone https://aur.archlinux.org/wps-office-cn.git \
+        && chown -R abc:abc wps-office-cn \
+        && cd wps-office-cn \
         && sudo -u abc makepkg -si --noconfirm) \
     && (mkdir -p /tmp/build && cd /tmp/build \
         && git clone https://aur.archlinux.org/ttf-wps-fonts.git \
