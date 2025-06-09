@@ -22,6 +22,7 @@ RUN pacman -Syyu --noconfirm \
         vim htop iotop iftop fuse2 \
         iputils net-tools dnsutils \
         npm maven bash-completion unarchiver \
+        noto-fonts-cjk \
     && (mkdir -p /tmp/build && cd /tmp/build \
         && git clone https://aur.archlinux.org/wps-office.git \
         && chown -R abc:abc wps-office \
