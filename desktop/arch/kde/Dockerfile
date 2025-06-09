@@ -24,12 +24,14 @@ RUN pacman -Syyu --noconfirm \
         npm maven bash-completion unarchiver \
     && (mkdir -p /tmp/build && cd /tmp/build \
         && git clone https://aur.archlinux.org/wps-office.git \
+        && chown -R abc:abc wps-office \
         && cd wps-office \
-        && sudo -u nobody makepkg -si --noconfirm) \
+        && sudo -u abc makepkg -si --noconfirm) \
     && (mkdir -p /tmp/build && cd /tmp/build \
         && git clone https://aur.archlinux.org/ttf-wps-fonts.git \
+        && chown -R abc:abc ttf-wps-fonts \
         && cd ttf-wps-fonts \
-        && sudo -u nobody makepkg -si --noconfirm) \
+        && sudo -u abc makepkg -si --noconfirm) \
     && rm -rf /tmp/build \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
