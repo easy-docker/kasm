@@ -16,15 +16,14 @@ RUN echo '[archlinuxcn]' >> /etc/pacman.conf && \
     echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
 
 # 同步包数据库并安装软件包
-RUN pacman -Sy --noconfirm archlinuxcn-keyring \
-    && pacman-key --populate archlinuxcn \
-    && pacman -Syyu --noconfirm \
+RUN pacman -Syyu --noconfirm \
     && pacman -Sy --noconfirm \
         git base-devel sudo yay sshpass \
         vim htop iotop iftop fuse2 \
         iputils net-tools dnsutils \
         npm maven bash-completion unarchiver \
-        wps-office ttf-wps-fonts \
+    # 从 AUR 安装 WPS Office 和字体
+    && yay -S --noconfirm wps-office ttf-wps-fonts \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
 
