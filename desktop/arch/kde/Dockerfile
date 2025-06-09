@@ -2,7 +2,7 @@ FROM lscr.io/linuxserver/webtop:arch-kde
 
 LABEL maintainer="Ghostry <ghostry.green@gmail.com>"
 
-# 启用 multilib 仓库（直接追加到 pacman.conf）
+# 启用 multilib 仓库
 RUN echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf
 
@@ -22,8 +22,16 @@ RUN pacman -Syyu --noconfirm \
         vim htop iotop iftop fuse2 \
         iputils net-tools dnsutils \
         npm maven bash-completion unarchiver \
-    # 从 AUR 安装 WPS Office 和字体
-    && yay -S --noconfirm wps-office ttf-wps-fonts \
+    # 手动从 AUR 安装 WPS Office
+    && (mkdir -p /tmp/build && cd /tmp/build \
+        && git clone https://aur.archlinux.org/wps-office.git \
+        && cd wps-office \
+        && sudo -u nobody makepkg -si --noconfirm) \
+    && (mkdir -p /tmp/build && cd /tmp/build \
+        && git clone https://aur.archlinux.org/ttf-wps-fonts.git \
+        && cd ttf-wps-fonts \
+        && sudo -u nobody makepkg -si --noconfirm) \
+    && rm -rf /tmp/build \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
 
