@@ -20,7 +20,7 @@ RUN pacman -Syyu --noconfirm \
     && pacman -Sy --noconfirm \
         git base-devel sudo yay sshpass \
         vim htop iotop iftop fuse2 \
-        iputils net-tools dnsutils dolphin-emu \
+        iputils net-tools dnsutils \
         npm maven bash-completion unarchiver \
     && (mkdir -p /tmp/build && cd /tmp/build \
         && git clone https://aur.archlinux.org/wps-office-cn.git \
