@@ -7,27 +7,40 @@ on:
   workflow_dispatch:  
   schedule:
     - cron: '0 3 * * 1'  # 每周一 03:00 (UTC 时间)
+
 jobs:
   push_to_registry:
     runs-on: ubuntu-latest
     steps:
-      - name: get_image_name
+      - name: Check out the repo
+        uses: actions/checkout@v3  # 更新到最新版本
+        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Generate image name
+        id: image_name
         run: |
           repository=${{ github.repository }}
           IMAGE_NAME=${{ github.actor }}/${repository##*/}
-
-          echo IMAGE_NAME=$IMAGE_NAME
-
-          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
-      - name: Check out the repo
-        uses: actions/checkout@v2
+          echo "name=${IMAGE_NAME}" >> $GITHUB_OUTPUT
+          echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+        
       - name: Log in to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2  # 更新到最新版本
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Push to Docker Hub
-        run: |
-          docker buildx build --cache-from type=gha --cache-to type=gha \
-          -f desktop/arch/kde/Dockerfile -t ${{ env.IMAGE_NAME }}:arch-kde-desktop .
-          docker push ${{ env.IMAGE_NAME }}:arch-kde-desktop
+        
+      - name: Build and push
+        uses: docker/build-push-action@v4  # 使用专用构建推送action
+        with:
+          context: .
+          file: desktop/arch/kde/Dockerfile
+          push: true
+          tags: ${{ steps.image_name.outputs.name }}:arch-kde-desktop
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
