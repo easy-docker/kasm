@@ -37,8 +37,8 @@ RUN \
     /var/lib/pacman/sync/*
 
 # add local files
-COPY root /
-
+COPY desktop/arch/kde/root /
+RUN chmod 755 /defaults/startwm.sh && chmod 755 /usr/local/bin/wrapped-chromium
 # ports and volumes
 EXPOSE 3000
 
