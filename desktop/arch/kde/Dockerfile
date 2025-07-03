@@ -67,7 +67,10 @@ RUN pacman -Syyu --noconfirm \
         iputils net-tools dnsutils \
         npm maven bash-completion unarchiver \
         ark dolphin-plugins \
-    && (mkdir -p /tmp/build && cd /tmp/build \
+    && pacman -Scc --noconfirm \
+    && rm -rf /var/cache/pacman/pkg/*
+# 安装wps
+RUN (mkdir -p /tmp/build && cd /tmp/build \
         && git clone https://aur.archlinux.org/wps-office-cn.git \
         && chown -R abc:abc wps-office-cn \
         && cd wps-office-cn \
