@@ -59,9 +59,13 @@ RUN echo '[archlinuxcn]' >> /etc/pacman.conf && \
     echo 'SigLevel = Never' >> /etc/pacman.conf && \
     echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
 
-# 更新，安装基础包
+# 更新
 RUN pacman -Syyu --noconfirm \
-    && pacman -Sy --noconfirm \
+    && pacman -Scc --noconfirm \
+    && rm -rf /var/cache/pacman/pkg/*
+
+# 安装基础包
+RUN pacman -Sy --noconfirm \
         git base-devel sudo yay sshpass \
         vim htop iotop iftop fuse2 \
         iputils net-tools dnsutils \
