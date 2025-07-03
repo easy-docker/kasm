@@ -9,6 +9,11 @@ LABEL maintainer="thelamer"
 # title
 ENV TITLE="Arch KDE"
 
+# 更新
+RUN pacman -Syyu --noconfirm \
+    && pacman -Scc --noconfirm \
+    && rm -rf /var/cache/pacman/pkg/*
+
 RUN \
   echo "**** add icon ****" && \
   curl -o \
@@ -58,11 +63,6 @@ RUN echo '[archlinuxcn]' >> /etc/pacman.conf && \
     echo '[arch4edu]' >> /etc/pacman.conf && \
     echo 'SigLevel = Never' >> /etc/pacman.conf && \
     echo 'Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch' >> /etc/pacman.conf
-
-# 更新
-RUN pacman -Syyu --noconfirm \
-    && pacman -Scc --noconfirm \
-    && rm -rf /var/cache/pacman/pkg/*
 
 # 安装基础包
 RUN pacman -Sy --noconfirm \
