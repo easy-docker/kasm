@@ -14,7 +14,7 @@ RUN pacman -Syyu --noconfirm \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
 
-COPY desktop/arch/kde/root/webtop-logo.png /kclient/public/icon.png
+COPY desktop/arch/kde/webtop-logo.png /kclient/public/icon.png
 
 RUN pacman -Sy --noconfirm --needed \
     kwin-x11 plasma-desktop && \
