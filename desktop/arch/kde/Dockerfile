@@ -103,6 +103,7 @@ RUN (mkdir -p /tmp/build && cd /tmp/build \
 # 安装软件包
 RUN pacman -Sy --noconfirm \
         npm maven \
+    && npm install -g pnpm \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
 
