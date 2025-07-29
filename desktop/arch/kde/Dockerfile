@@ -79,7 +79,7 @@ RUN echo '[archlinuxcn]' >> /etc/pacman.conf && \
 # 安装基础包
 RUN pacman -Sy --noconfirm \
         git base-devel sudo yay sshpass \
-        vim htop iotop iftop \
+        vim htop iotop iftop xorg-xkill \
         iputils net-tools dnsutils \
         zsh  \
     && pacman -Scc --noconfirm \
