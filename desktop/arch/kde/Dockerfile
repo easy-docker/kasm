@@ -81,7 +81,7 @@ RUN pacman -Sy --noconfirm \
         git base-devel sudo yay sshpass \
         vim htop iotop iftop xorg-xkill \
         iputils net-tools dnsutils \
-        zsh  \
+        zsh terminator \
     && pacman -Scc --noconfirm \
     && rm -rf /var/cache/pacman/pkg/*
 
