@@ -115,3 +115,7 @@ RUN echo "Server = https://mirrors.aliyun.com/archlinux/\$repo/os/\$arch" > /etc
     echo "Server = https://mirrors.cernet.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist && \
     echo "Server = https://mirrors.xjtu.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist && \
     echo "Server = https://mirrors.shanghaitech.edu.cn/archlinux/\$repo/os/\$arch" >> /etc/pacman.d/mirrorlist
+
+# 修改 /etc/locale.gen
+RUN echo 'zh_CN.UTF-8 UTF-8' >> /etc/locale.gen \
+    && locale-gen
