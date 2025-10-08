@@ -118,5 +118,5 @@ RUN echo "Server = https://mirrors.aliyun.com/archlinux/\$repo/os/\$arch" > /etc
 
 # 修改 /etc/locale.gen
 RUN echo 'zh_CN.UTF-8 UTF-8' >> /etc/locale.gen \
-    echo 'zh_TW.UTF-8 UTF-8' >> /etc/locale.gen \
+    && echo 'zh_TW.UTF-8 UTF-8' >> /etc/locale.gen \
     && locale-gen
